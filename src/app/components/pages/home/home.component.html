@@ -24,7 +24,7 @@
       <a href="#" class="hover:scale-105 transition-transform duration-300"
         [ngClass]="{'opacity-50': loading, 'pointer-events-none': loading}">
         <div class="card w-70 h-100 bg-base-100 shadow-xl">
-          <figure class="max-h-[186px]"><img [src]="actividad.imagen" [alt]="actividad.deporte"/></figure>
+          <figure class="max-h-[186px] min-h-[186px]"><img [src]="actividad.imagen" [alt]="actividad.deporte" class="w-full h-full object-cover"/></figure>
           <div class="card-body">
             <div class="card w-20 h-15 bg-base-100 shadow absolute top-[150px] right-[20px]">
               <div class="h-full w-full flex justify-center items-center">
