@@ -9,10 +9,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class CarouselComponent implements OnInit, OnDestroy {
   images: string[] = [
-    'assets/img/img2.jpg',
-    'assets/img/img1.png',
-    'assets/img/img3.jpg',
-    'assets/img/img4.jpg'
+    'assets/img/carousel/img2.jpg',
+    'assets/img/carousel/img1.png',
+    'assets/img/carousel/img3.jpg',
+    'assets/img/carousel/img4.jpg'
   ];
   currentIndex = 0;
   intervalId: any;

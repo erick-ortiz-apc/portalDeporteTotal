@@ -1,22 +1,22 @@
-<div class="card bg-base-100 w-[90%] mx-auto shadow-sm position-relative top-[-50px]">
+<div class="card bg-gray-50 w-[90%] mx-auto shadow-sm position-relative top-[-50px]">
   <div class="card-body py-10">
     <section class="pb-8">
       <div class="max-w-7xl mx-auto px-4">
-        <h2 class="text-xl text-center font-bold mb-6">Deportes disponibles</h2>
-        <div class="relative">
-          <button class="btn btn-circle absolute left-[-2rem] top-[2rem] z-10 bg-white shadow"
+        <h2 class="text-roboto text-xl text-center font-bold mb-6">Deportes disponibles</h2>
+        <div class="relative min-h-36">
+          <button class="btn btn-circle absolute left-[-2rem] top-[2.5rem] z-10 bg-white shadow"
             (click)="scrollLeft()">❮</button>
-          <button class="btn btn-circle absolute right-[-2rem] top-[2rem] z-10 bg-white shadow"
+          <button class="btn btn-circle absolute right-[-2rem] top-[2.5rem] z-10 bg-white shadow"
             (click)="scrollRight()">❯</button>
-          <div #carousel class="flex overflow-x-hidden gap-6 no-scrollbar snap-x scroll-smooth px-5"
-            id="brand-carousel">
-            <div class="flex flex-col items-center snap-start shrink-0 cursor-pointer transition-all duration-300"
-              *ngFor="let d of filtros.deportes" (click)="toggleDeporte(d)">
+          <div #carousel class="flex overflow-hidden gap-6 no-scrollbar snap-x scroll-smooth px-5 pt-3" id="brand-carousel">
+            <div class="flex flex-col items-center snap-start shrink-0 cursor-pointer transition-all duration-300 hover:scale-105"
+                *ngFor="let d of filtros.deportes" (click)="toggleDeporte(d)">
               <div class="w-24 h-24 rounded-full bg-white flex items-center justify-center shadow relative"
-                [class.border-2]="selectedDeportes.includes(d)" [class.border-blue-500]="selectedDeportes.includes(d)">
+                  [class.border-2]="formFiltros.value.deporte.includes(d)"
+                  [class.border-blue-500]="formFiltros.value.deporte.includes(d)">
                 <img [src]="'assets/icon/' + getIconFile(d)" [alt]="d" class="w-14 h-auto" />
-                <img *ngIf="selectedDeportes.includes(d)" src="assets/icon/selected.svg"
-                  class="absolute bottom-[-5px] right-[10px] w-5 h-5" />
+                <img *ngIf="formFiltros.value.deporte.includes(d)" src="assets/icon/selected.svg"
+                    class="absolute bottom-[-5px] right-[10px] w-5 h-5" />
               </div>
               <p class="text-sm mt-2">{{ d }}</p>
             </div>
@@ -25,28 +25,33 @@
       </div>
     </section>
     <div class="flex items-end justify-center gap-5 flex-wrap">
-      <fieldset class="fieldset">
-        <legend class="fieldset-legend">Edad</legend>
-        <select class="select w-[250px]">
-          <option *ngFor="let e of filtros.edades">{{ e }}</option>
-        </select>
-      </fieldset>
-      <fieldset class="fieldset">
-        <legend class="fieldset-legend">Región</legend>
-        <select class="select w-[250px]" (change)="onRegionChange($event)">
-          <option *ngFor="let r of filtros.regiones" [value]="r">{{ r }}</option>
-        </select>
-      </fieldset>
-      <fieldset class="fieldset">
-        <legend class="fieldset-legend">Comuna</legend>
-        <select class="select w-[250px]">
-          <option value="">Todas</option>
-          <option *ngFor="let c of filteredComunas">{{ c }}</option>
-        </select>
-      </fieldset>
-      <div class="card-actions py-1">
-        <button class="btn btn-default px-10">Limpiar filtros</button>
-      </div>
+      <form [formGroup]="formFiltros" class="flex items-end justify-center gap-5 flex-wrap">
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Edad</legend>
+          <select class="select w-[250px]" formControlName="edad">
+            <option *ngFor="let e of filtros.edades">{{ e }}</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Región</legend>
+          <select class="select w-[250px]" formControlName="region">
+            <option *ngFor="let r of filtros.regiones" [value]="r">{{ r }}</option>
+          </select>
+        </fieldset>
+
+        <fieldset class="fieldset">
+          <legend class="fieldset-legend">Comuna</legend>
+          <select class="select w-[250px]" formControlName="comuna">
+            <option value="Todas">Todas</option>
+            <option *ngFor="let c of filteredComunas">{{ c }}</option>
+          </select>
+        </fieldset>
+
+        <div class="card-actions py-1">
+          <button type="button" class="btn btn-default px-10" (click)="resetFiltros()">Limpiar filtros</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
