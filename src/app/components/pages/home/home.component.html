@@ -19,7 +19,7 @@
       </div>
     </div>
   </ng-container>
-  <div class="mx-20 flex flex-wrap justify-center gap-10 pb-10">
+  <div id="actividad-cards" class="mx-20 flex flex-wrap justify-center gap-10 pb-10">
     <ng-container *ngFor="let actividad of actividades">
       <a href="#" class="hover:scale-105 transition-transform duration-300"
         [ngClass]="{'opacity-50': loading, 'pointer-events-none': loading}">
@@ -46,3 +46,12 @@
     </app-pagination>
   </div>
 </div>
+<!-- Botón Scroll Up visible solo si se activa -->
+<button
+  *ngIf="showScrollTopButton"
+  class="fixed bottom-2 right-2 z-50 bg-[#00a96e73] text-white rounded-full w-12 h-12 shadow-lg md:hidden flex items-center justify-center"
+  (click)="scrollToTop()"
+  aria-label="Volver arriba">
+  <img src="assets/icon/arrow-up.svg" alt="" class="w-6 mt-1">
+</button>
+
