@@ -30,8 +30,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -68,8 +68,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -106,8 +106,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -144,8 +144,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -182,8 +182,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -220,8 +220,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -258,8 +258,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -296,8 +296,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -334,8 +334,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -372,8 +372,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -410,8 +410,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -448,8 +448,8 @@ export class HomeComponent implements OnInit {
       region: "Metropolitana",
       comuna: "Las Condes",
       direccion: "Av. Ejemplo 1234",
-      telefono: "+56 9 8765 4321",
-      email: "contacto@ejemplo.cl",
+      telefono: "+56945425694",
+      email: "erickoovv8@gmail.cl",
       representante: "Nombre Representante",
       becaDisponible: true,
       esGratuito: false,
@@ -480,6 +480,8 @@ export class HomeComponent implements OnInit {
   selectedOrder: any = 'Más relevantes';
   orders = ['Más relevantes', 'Ordenado A-Z', 'Ordenado Z-A', 'Más nuevos', 'Más antiguos'];
   showScrollTopButton = false;
+  selectedActividad: any = null;
+
   constructor() { }
 
   ngOnInit() {
@@ -517,5 +519,27 @@ export class HomeComponent implements OnInit {
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  goToActividad(actividad: any) {
+    this.selectedActividad = actividad;
+    const modal = document.getElementById('actividadModal') as HTMLDialogElement;
+    if (modal) modal.showModal();
+  }
+
+  isLastHorario(horario: any): boolean {
+    return this.selectedActividad?.horarios?.indexOf(horario) === this.selectedActividad.horarios.length - 1;
+  }
+
+  contactar(contacto: any, medio: string) {
+    if (medio === 'mail') {
+      window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=${contacto}`, '_blank');
+    } else if (medio === 'wsp') {
+      window.open(`https://wa.me/${contacto}`, '_blank');
+    } else if (medio === 'tel') {
+      window.open(`tel:${contacto}`, '_self');
+    } else {
+      console.error('Medio de contacto no reconocido');
+    }
   }
 }
