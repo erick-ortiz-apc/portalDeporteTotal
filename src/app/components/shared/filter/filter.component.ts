@@ -84,14 +84,15 @@ export class FilterComponent implements OnInit, OnChanges {
       this.formFiltros?.get('orden')?.setValue(this.order);
     }
   }
-
-  scrollRight() {
-    const scrollAmount = 200;
-    this.carouselRef.nativeElement.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  
+  scrollRight(id: string) {
+    const el = document.getElementById(id);
+    if (el) el.scrollBy({ left: 200, behavior: 'smooth' });
   }
-  scrollLeft() {
-    const scrollAmount = 200;
-    this.carouselRef.nativeElement.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+
+  scrollLeft(id: string) {
+    const el = document.getElementById(id);
+    if (el) el.scrollBy({ left: -200, behavior: 'smooth' });
   }
 
   toggleDeporte(deporte: string): void {
