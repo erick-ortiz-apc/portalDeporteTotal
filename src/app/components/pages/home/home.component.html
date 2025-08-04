@@ -21,11 +21,11 @@
   </ng-container>
   <div id="actividad-cards" class="mx-20 flex flex-wrap justify-center gap-10 pb-10">
     <ng-container *ngFor="let actividad of actividades">
-      <a href="#" class="hover:scale-105 transition-transform duration-300"
+      <a (click)="goToActividad(actividad)" class="hover:scale-105 transition-transform duration-300 cursor-pointer"
         [ngClass]="{'opacity-50': loading, 'pointer-events-none': loading}">
         <div class="card w-70 h-100 bg-base-100 shadow-xl">
           <figure class="max-h-[186px] min-h-[186px]">
-            <img [src]="actividad.imagen" [alt]="actividad.deporte" class="w-full h-full object-cover"/>
+            <img [src]="actividad.imagen" [alt]="actividad.deporte" class="w-full h-full object-cover" />
           </figure>
           <div class="card-body">
             <div class="card w-20 h-15 bg-base-100 shadow absolute top-[150px] right-[20px]">
@@ -46,12 +46,111 @@
     </app-pagination>
   </div>
 </div>
-<!-- Botón Scroll Up visible solo si se activa -->
-<button
-  *ngIf="showScrollTopButton"
+<button *ngIf="showScrollTopButton"
   class="fixed bottom-2 right-2 z-50 bg-[#00a96e73] text-white rounded-full w-12 h-12 shadow-lg md:hidden flex items-center justify-center"
-  (click)="scrollToTop()"
-  aria-label="Volver arriba">
+  (click)="scrollToTop()" aria-label="Volver arriba">
   <img src="assets/icon/arrow-up.svg" alt="" class="w-6 mt-1">
 </button>
-
+<dialog #actividadModal id="actividadModal" class="modal">
+  <div class="modal-box w-screen md:w-11/12 max-w-3xl xl:max-w-4xl p-6 relative">
+    <div *ngIf="selectedActividad">
+      <form method="dialog" class="w-full flex justify-end mb-1 sm:hidden">
+        <button class="cursor-pointer">
+          <img src="assets/icon/close-black.svg" alt="cerrar" class="w-6" />
+        </button>
+      </form>
+      <div class="card w-full bg-base-100">
+        <figure class="max-h-[250px] min-h-[250px]">
+          <img [src]="selectedActividad.imagen" [alt]="selectedActividad.deporte" class="w-full h-full object-cover" />
+        </figure>
+        <div class="card-body">
+          <form method="dialog" class="absolute top-2 right-2 hidden sm:block">
+            <button class="bg-[#5c5c5c62] hover:bg-[#5c5c5c98] p-2 rounded-full flex items-center cursor-pointer">
+              <img src="assets/icon/close.svg" alt="cerrar" class="w-6" />
+            </button>
+          </form>
+          <div class="absolute top-[200px] right-[30px] bg-white p-2 rounded shadow">
+            <img [src]="selectedActividad.icono" alt="icono" class="w-12" />
+          </div>
+          <h2 class="card-title mt-6">{{ selectedActividad.titulo }}</h2>
+          <p>{{ selectedActividad.descripcion }}</p>
+          <p *ngIf="selectedActividad.extra">{{ selectedActividad.extra }}</p>
+          <div class="flex gap-4 mt-4 items-center">
+            <a *ngIf="selectedActividad.sitioWeb" [href]="selectedActividad.sitioWeb" target="_blank"
+              aria-label="Sitio Web" class="text-gray-600 hover:text-blue-600 transition-colors">
+              <img src="assets/icon/web.svg" alt="" class="w-7">
+            </a>
+            <a *ngIf="selectedActividad.redesSociales?.instagram" [href]="selectedActividad.redesSociales.instagram"
+              target="_blank" aria-label="Instagram" class="text-gray-600 hover:text-pink-600 transition-colors">
+              <img src="assets/icon/in.svg" alt="" class="w-6">
+            </a>
+            <a *ngIf="selectedActividad.redesSociales?.facebook" [href]="selectedActividad.redesSociales.facebook"
+              target="_blank" aria-label="Facebook" class="text-gray-600 hover:text-blue-700 transition-colors">
+              <img src="assets/icon/fb.svg" alt="" class="w-6">
+            </a>
+          </div>
+          <div class="divider"></div>
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2">Contacto</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+              <p><strong>Representante:</strong> {{ selectedActividad.representante }}</p>
+              <p><strong>Teléfono:</strong> {{ selectedActividad.telefono }}</p>
+              <p><strong>Email:</strong> {{ selectedActividad.email }}</p>
+              <p><strong>Dirección:</strong> {{ selectedActividad.direccion }}, {{ selectedActividad.comuna }}, {{
+                selectedActividad.region }}</p>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2">Información General</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+              <p><strong>Cupos disponibles:</strong> {{ selectedActividad.cuposDisponibles }}</p>
+              <p><strong>¿Beca disponible?</strong> {{ selectedActividad.becaDisponible ? 'Sí' : 'No' }}</p>
+              <p><strong>¿Gratuito?</strong> {{ selectedActividad.esGratuito ? 'Sí' : 'No' }}</p>
+              <p><strong>Modalidad de pago:</strong> {{ selectedActividad.modalidadPago }}</p>
+              <p><strong>Tipo de pago:</strong> {{ selectedActividad.tipoPago }}</p>
+              <p><strong>Precio:</strong> {{ selectedActividad.precio | currency:'CLP' }}</p>
+              <p><strong>Modalidad:</strong> {{ selectedActividad.modalidad }}</p>
+              <p><strong>¿Requiere inscripción?</strong> {{ selectedActividad.requiereInscripcionPrevia ? 'Sí' : 'No' }}
+              </p>
+              <p><strong>¿Apto para PCD?</strong> {{ selectedActividad.aceptaPCD ? 'Sí' : 'No' }}</p>
+              <p><strong>Nivel:</strong> {{ selectedActividad.nivel.join(', ') }}</p>
+              <p><strong>Sexo:</strong> {{ selectedActividad.sexo.join(', ') }}</p>
+              <p><strong>Edades permitidas:</strong> {{ selectedActividad.edadesPermitidas.join(', ') }}</p>
+              <p><strong>Materiales requeridos:</strong> {{ selectedActividad.materiales.requiere.join(', ') }}</p>
+              <p><strong>Materiales proporcionados:</strong> {{ selectedActividad.materiales.proporcionados.join(', ')
+                }}</p>
+              <p *ngIf="selectedActividad.observaciones"><strong>Observaciones:</strong> {{
+                selectedActividad.observaciones }}</p>
+            </div>
+          </div>
+          <div class="mb-6">
+            <h3 class="text-lg font-semibold mb-2">Horarios y Ejecución</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+              <p><strong>Fechas:</strong> {{ selectedActividad.fechaInicio }} a {{ selectedActividad.fechaTermino }}</p>
+              <p><strong>Días:</strong> {{ selectedActividad.diasEjecucion.join(', ') }}</p>
+              <p><strong>Horarios:</strong>
+                <span *ngFor="let h of selectedActividad.horarios">
+                  {{ h.inicio }} - {{ h.fin }}<span *ngIf="!isLastHorario(h)">, </span>
+                </span>
+              </p>
+            </div>
+          </div>
+          <div class="flex justify-center flex-wrap sm:justify-end gap-3">
+            <button class="btn btn-info text-white" (click)="contactar(selectedActividad.email, 'mail')">
+              <img src="assets/icon/mail.svg" alt="" class="w-6 mr-2">
+              Contactar
+            </button>
+            <button class="btn btn-success text-white" (click)="contactar(selectedActividad.telefono, 'wsp')">
+              <img src="assets/icon/wsp.svg" alt="" class="w-6 mr-2">
+              Contactar
+            </button>
+            <button class="btn btn-secondary text-white sm:hidden" (click)="contactar(selectedActividad.telefono, 'tel')">
+              <img src="assets/icon/call.svg" alt="" class="w-6 mr-2">
+              Contactar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
