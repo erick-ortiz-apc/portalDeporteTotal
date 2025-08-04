@@ -115,7 +115,7 @@ export class FilterComponent implements OnInit, OnChanges {
 
   getIconFile(deporte: string): string {
     const map: Record<string, string> = {
-      'PCD': 'pcd.png',
+      'Inclusivo': 'pcd.png',
       'Fútbol': 'futbol.png',
       'Basketball': 'baloncesto.png',
       'Vóleibol': 'voleibol.png',
