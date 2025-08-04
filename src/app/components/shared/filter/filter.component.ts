@@ -69,19 +69,19 @@ export class FilterComponent implements OnInit, OnChanges {
       orden: [this.order]
     });
 
-    this.formFiltros.get('region')?.valueChanges.subscribe((region: keyof typeof this.filtros.comunasPorRegion) => {
+    this.formFiltros?.get('region')?.valueChanges.subscribe((region: keyof typeof this.filtros.comunasPorRegion) => {
       this.filteredComunas = this.filtros.comunasPorRegion[region] || [];
-      this.formFiltros.get('comuna')?.setValue('Todas');
+      this.formFiltros?.get('comuna')?.setValue('Todas');
     });
 
-    this.formFiltros.valueChanges.subscribe(filtros => {
+    this.formFiltros?.valueChanges.subscribe(filtros => {
       this.filtrosCambiaron.emit(filtros);
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['order']) {
-      this.formFiltros.get('orden')?.setValue(this.order);
+      this.formFiltros?.get('orden')?.setValue(this.order);
     }
   }
 
@@ -95,14 +95,14 @@ export class FilterComponent implements OnInit, OnChanges {
   }
 
   toggleDeporte(deporte: string): void {
-    const deportes = this.formFiltros.value.deporte;
+    const deportes = this.formFiltros?.value.deporte;
     const index = deportes.indexOf(deporte);
     if (index > -1) {
       deportes.splice(index, 1);
     } else {
       deportes.push(deporte);
     }
-    this.formFiltros.get('deporte')?.setValue([...deportes]);
+    this.formFiltros?.get('deporte')?.setValue([...deportes]);
   }
 
 
@@ -133,7 +133,7 @@ export class FilterComponent implements OnInit, OnChanges {
   }
 
   resetFiltros(): void {
-    this.formFiltros.reset({
+    this.formFiltros?.reset({
       deporte: [],
       edad: 'Todas',
       region: 'Todas',
