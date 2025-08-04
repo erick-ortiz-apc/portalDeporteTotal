@@ -77,15 +77,15 @@
           <p *ngIf="selectedActividad.extra">{{ selectedActividad.extra }}</p>
           <div class="flex gap-4 mt-4 items-center">
             <a *ngIf="selectedActividad.sitioWeb" [href]="selectedActividad.sitioWeb" target="_blank"
-              aria-label="Sitio Web" class="text-gray-600 hover:text-blue-600 transition-colors">
+              aria-label="Sitio Web">
               <img src="assets/icon/web.svg" alt="" class="w-7">
             </a>
             <a *ngIf="selectedActividad.redesSociales?.instagram" [href]="selectedActividad.redesSociales.instagram"
-              target="_blank" aria-label="Instagram" class="text-gray-600 hover:text-pink-600 transition-colors">
+              target="_blank" aria-label="Instagram">
               <img src="assets/icon/in.svg" alt="" class="w-6">
             </a>
             <a *ngIf="selectedActividad.redesSociales?.facebook" [href]="selectedActividad.redesSociales.facebook"
-              target="_blank" aria-label="Facebook" class="text-gray-600 hover:text-blue-700 transition-colors">
+              target="_blank" aria-label="Facebook">
               <img src="assets/icon/fb.svg" alt="" class="w-6">
             </a>
           </div>
