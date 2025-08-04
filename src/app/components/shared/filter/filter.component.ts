@@ -20,7 +20,7 @@ export class FilterComponent implements OnInit, OnChanges {
   filteredComunas: any[] = [];
   filtros = {
     deportes: [
-      'PCD', 'Fútbol', 'Basketball', 'Vóleibol', 'Tenis', 'Natación',
+      'Inclusivo', 'Fútbol', 'Basketball', 'Vóleibol', 'Tenis', 'Natación',
       'Atletismo', 'Gimnasia', 'Ciclismo',
       'Crossfit', 'Pesas', 'Yoga', 'Ping-Pong', 'Combate'
     ],
