@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FilterComponent } from "../../shared/filter/filter.component";
 import { PaginationComponent } from "../../shared/pagination/pagination.component";
 import { CarouselComponent } from "../../shared/carousel/carousel.component";
@@ -479,7 +479,7 @@ export class HomeComponent implements OnInit {
   loading: boolean = true;
   selectedOrder: any = 'Más relevantes';
   orders = ['Más relevantes', 'Ordenado A-Z', 'Ordenado Z-A', 'Más nuevos', 'Más antiguos'];
-
+  showScrollTopButton = false;
   constructor() { }
 
   ngOnInit() {
@@ -504,5 +504,18 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.loading = false;
     }, 3000);
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    const actividadCards = document.getElementById('actividad-cards');
+    if (actividadCards) {
+      const top = actividadCards.getBoundingClientRect().top;
+      this.showScrollTopButton = top <= window.innerHeight * 0.9;
+    }
+  }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 }
